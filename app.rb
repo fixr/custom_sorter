@@ -15,8 +15,14 @@ namespace '/api/v1' do
     content_type 'application/json'
   end
 
-  get '/hello' do
-    { test: "hello!" }.to_json
+  # implement sorting through params
+  # example: /api/v1/asc/name/oss/age
+  get '/sort/:order/?:field1?/?:field2?/?:field3?' do
+  end
+
+  # for sake of simplicity (and not using persistence!), let's
+  # assume the patch also implements sorting
+  patch '/sort/:order/?:field1?/?:field2?/?:field3?' do
   end
 
 end
