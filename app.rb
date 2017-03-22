@@ -110,10 +110,10 @@ namespace '/api/v1' do
   end
 
   # for sake of simplicity (and not using persistence!), let's
-  # assume the patch also implements sorting
+  # assume the PUT also implements sorting
   #
-  # Test: curl -i -X PATCH -H "Content-Type: application/json" -d'[{"name":"DHH","age":40,"oss_projects":5}, {"name":"Linus","age":45,"oss_projects":1}]' https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/desc
-  patch '/sort/:order/?:f1?/?:f2?/?:f3?' do
+  # Test: curl -i -X PUT -H "Content-Type: application/json" -d'[{"name":"DHH","age":40,"oss_projects":5}, {"name":"Linus","age":45,"oss_projects":1}]' https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/desc
+  put '/sort/:order/?:f1?/?:f2?/?:f3?' do
     users = User.sample(json_params)
     cs = CustomSorter.new(params[:order])
     obj_to_json cs.sort(users, *sorting_params)
