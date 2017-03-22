@@ -1,0 +1,35 @@
+---
+# sample users
+-
+  name: John
+  age: 29
+  oss_projects: 3
+-
+  name: Linda
+  age: 29
+  oss_projects: 5
+-
+  name: Robert
+  age: 24
+  oss_projects: 1
+-
+  name: Amanda
+  age: 21
+  oss_projects: 8
+-
+  name: Lawrence
+  age: 32
+  oss_projects: 2
+-
+  name: Steven
+  age: 24
+  oss_projects: 4
+-
+  name: Amanda
+  age: 22
+  oss_projects: 5
+-
+  name: John
+  age: 29
+  oss_projects: 1
+...
