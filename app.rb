@@ -4,6 +4,7 @@ require 'yaml'
 
 Bundler.require
 
+# Mixin for loading user data
 module UserData
   def sample(populate = [])
     users = []
@@ -21,11 +22,19 @@ module UserData
 
 end
 
+# User attributes
 class User < Struct.new(:name, :age, :oss_projects)
   extend UserData
 end
 
-
+# Provides sorting based on selected, user specified
+# fields to any Enumerable
+#
+# Sample usage:
+# cs = CustomSorter.new('desc')
+# cs.sort(users, :name, :age)
+#
+# Returns a sorted collection
 class CustomSorter
 
   SORT_OPTIONS = ['asc', 'desc']
@@ -70,12 +79,12 @@ namespace '/api/v1' do
 
   helpers do
 
-    # extract f* optional values
+    # extract f1..f3 optional URL parameters
     def sorting_params
       params.select { |k| k.to_s.match(/^f\d+/) }.values
     end
 
-    # read body payload
+    # parse body payload
     def json_params
       begin
         JSON.parse(request.body.read)
@@ -103,7 +112,7 @@ namespace '/api/v1' do
   # for sake of simplicity (and not using persistence!), let's
   # assume the patch also implements sorting
   #
-  # Test: curl -i -X PATCH -H "Content-Type: application/json" -d'[{"name":"Freddy","age": 32,"oss_projects":3}, {"name":"Linus","age": 45,"oss_projects":1}]' https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/desc
+  # Test: curl -i -X PATCH -H "Content-Type: application/json" -d'[{"name":"DHH","age":40,"oss_projects":5}, {"name":"Linus","age":45,"oss_projects":1}]' https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/desc
   patch '/sort/:order/?:f1?/?:f2?/?:f3?' do
     users = User.sample(json_params)
     cs = CustomSorter.new(params[:order])
