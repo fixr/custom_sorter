@@ -1,7 +1,6 @@
 require 'bundler'
 require 'set'
 require 'yaml'
-require 'pry'
 
 Bundler.require
 
@@ -95,7 +94,7 @@ namespace '/api/v1' do
   # implement sorting through params
   # example: /api/v1/asc/name/oss/age
   #
-  # Test: curl -i -H "Content-Type: application/json" http://localhost:4567/api/v1/sort/asc/name
+  # Test: curl -i -H "Content-Type: application/json" https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/asc/name
   get '/sort/:order/?:f1?/?:f2?/?:f3?' do
     cs = CustomSorter.new(params[:order])
     obj_to_json cs.sort(User.sample, *sorting_params)
@@ -104,7 +103,7 @@ namespace '/api/v1' do
   # for sake of simplicity (and not using persistence!), let's
   # assume the patch also implements sorting
   #
-  # Test: curl -i -X PATCH -H "Content-Type: application/json" -d'[{"name":"Freddy","age": 32,"oss_projects":3}, {"name":"Linus","age": 45,"oss_projects":1}]' http://localhost:4567/api/v1/sort/desc
+  # Test: curl -i -X PATCH -H "Content-Type: application/json" -d'[{"name":"Freddy","age": 32,"oss_projects":3}, {"name":"Linus","age": 45,"oss_projects":1}]' https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/desc
   patch '/sort/:order/?:f1?/?:f2?/?:f3?' do
     users = User.sample(json_params)
     cs = CustomSorter.new(params[:order])
