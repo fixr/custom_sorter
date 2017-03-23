@@ -17,7 +17,7 @@ cs.sort(Collection, :name, :age)
 
 `curl -i -H "Content-Type: application/json" https://blooming-anchorage-70739.herokuapp.com/api/v1/sort/desc/age/name/oss_projects`
 
-Up to three params can be added to the URL, along with the direction.
+Up to three params can be added to the URL, along with the direction (asc, desc). The order of the params affects which attr is sorted first.
 
 ### PUT with custom data
 
